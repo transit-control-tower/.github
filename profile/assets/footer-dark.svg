@@ -4,7 +4,6 @@
     text { font-family: Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif; }
     .b { font-weight: 700; }
     .xb { font-weight: 800; letter-spacing: -0.02em; }
-    @media (prefers-reduced-motion: reduce) { .train { display: none; } }
     </style>
 <rect width="1280" height="150" fill="#1E2733"/>
 <path d="M 0 39 H 360 L 396 75 H 470" fill="none" stroke="#00A84D" stroke-width="10" stroke-linejoin="round"/>

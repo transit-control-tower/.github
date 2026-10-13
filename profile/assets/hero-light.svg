@@ -4,13 +4,8 @@
     text { font-family: Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif; }
     .b { font-weight: 700; }
     .xb { font-weight: 800; letter-spacing: -0.02em; }
-    @media (prefers-reduced-motion: reduce) { .train { display: none; } }
     
     .train-parked, .flow-still { display: none; }
-    @media (prefers-reduced-motion: reduce) {
-        .flow { display: none; }
-        .train-parked, .flow-still { display: inline; }
-    }
     </style>
 <rect width="1280" height="400" fill="#F2F4F3"/>
 <g class="flow"><g><path d="M 0 354 C 213.33 331 426.67 331 640.00 354 C 853.33 377 1066.67 377 1280 354 C 1493.33 331 1706.67 331 1920.00 354 C 2133.33 377 2346.67 377 2560 354 L 2560 430 L 0 430 Z" fill="#00A84D" opacity="0.098"/><animateTransform attributeName="transform" type="translate" values="0 0;-1280 0" dur="18s" repeatCount="indefinite"/></g><g><path d="M 0 371 C 213.33 347 426.67 347 640.00 371 C 853.33 395 1066.67 395 1280 371 C 1493.33 347 1706.67 347 1920.00 371 C 2133.33 395 2346.67 395 2560 371 L 2560 430 L 0 430 Z" fill="#3D5BAB" opacity="0.165"/><animateTransform attributeName="transform" type="translate" values="-1280 0;0 0" dur="24s" repeatCount="indefinite"/></g><g><path d="M 0 391 C 213.33 375 426.67 375 640.00 391 C 853.33 407 1066.67 407 1280 391 C 1493.33 375 1706.67 375 1920.00 391 C 2133.33 407 2346.67 407 2560 391 L 2560 430 L 0 430 Z" fill="#E5336F" opacity="0.068"/><animateTransform attributeName="transform" type="translate" values="0 0;-1280 0" dur="30s" repeatCount="indefinite"/></g></g><g class="flow-still"><path d="M 0 354 C 213.33 331 426.67 331 640.00 354 C 853.33 377 1066.67 377 1280 354 C 1493.33 331 1706.67 331 1920.00 354 C 2133.33 377 2346.67 377 2560 354 L 2560 430 L 0 430 Z" fill="#00A84D" opacity="0.098"/><path d="M 0 371 C 213.33 347 426.67 347 640.00 371 C 853.33 395 1066.67 395 1280 371 C 1493.33 347 1706.67 347 1920.00 371 C 2133.33 395 2346.67 395 2560 371 L 2560 430 L 0 430 Z" fill="#3D5BAB" opacity="0.165"/><path d="M 0 391 C 213.33 375 426.67 375 640.00 391 C 853.33 407 1066.67 407 1280 391 C 1493.33 375 1706.67 375 1920.00 391 C 2133.33 407 2346.67 407 2560 391 L 2560 430 L 0 430 Z" fill="#E5336F" opacity="0.068"/></g>

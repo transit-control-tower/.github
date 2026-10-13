@@ -33,7 +33,6 @@ def svg(w, h, t, body, title, extra_style=""):
     text {{ font-family: {FONT}; }}
     .b {{ font-weight: 700; }}
     .xb {{ font-weight: 800; letter-spacing: -0.02em; }}
-    @media (prefers-reduced-motion: reduce) {{ .train {{ display: none; }} }}
     """
     if extra_style:
         style += extra_style
@@ -181,10 +180,6 @@ def hero(t, name):
         cx += 30 + kw + est(v, 14) + 24
     motion_style = """
     .train-parked, .flow-still { display: none; }
-    @media (prefers-reduced-motion: reduce) {
-        .flow { display: none; }
-        .train-parked, .flow-still { display: inline; }
-    }
     """
     return svg(W, H, t, "\n".join(b), "Transit Control Tower — 관제탑5팀", motion_style)
 

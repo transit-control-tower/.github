@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg?v=flow-20261013">
-  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg?v=flow-20261013">
-  <img src="assets/hero-light.svg?v=flow-20261013" alt="Transit Control Tower — 관제탑5팀. 교통 데이터로 도시의 흐름을 읽고, 운영 판단을 돕습니다." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg?v=motion-always-20261013">
+  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg?v=motion-always-20261013">
+  <img src="assets/hero-light.svg?v=motion-always-20261013" alt="Transit Control Tower — 관제탑5팀. 교통 데이터로 도시의 흐름을 읽고, 운영 판단을 돕습니다." width="100%">
 </picture>
 
 <p align="center">
@@ -40,9 +40,9 @@
 ## 시스템 노선도
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/route-map-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/route-map-light.svg">
-  <img src="assets/route-map-light.svg" alt="시스템 노선도. 실시간 관측 노선: 도시데이터 OA-21285, Azure Functions, Event Hubs, Stream Analytics, PostgreSQL. 혼잡 예측 노선: 날씨·행사·공휴일, Inference Function, Azure ML. 근거 검색 노선: 운영 매뉴얼·사례, Azure AI Search, RAG API. 세 노선은 운영 웹 대시보드에서 만납니다." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/route-map-dark.svg?v=motion-always-20261013">
+  <source media="(prefers-color-scheme: light)" srcset="assets/route-map-light.svg?v=motion-always-20261013">
+  <img src="assets/route-map-light.svg?v=motion-always-20261013" alt="시스템 노선도. 실시간 관측 노선: 도시데이터 OA-21285, Azure Functions, Event Hubs, Stream Analytics, PostgreSQL. 혼잡 예측 노선: 날씨·행사·공휴일, Inference Function, Azure ML. 근거 검색 노선: 운영 매뉴얼·사례, Azure AI Search, RAG API. 세 노선은 운영 웹 대시보드에서 만납니다." width="100%">
 </picture>
 
 세 개의 노선이 하나의 대시보드로 모입니다.
@@ -73,9 +73,9 @@
 ## 개발 운행 현황
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/roadmap-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/roadmap-light.svg">
-  <img src="assets/roadmap-light.svg" alt="개발 운행 현황. 구현: MVP 기준 수립, 수집·전처리(PR #7), ML 재구성(PR #2), 추론 파이프라인(PR #1). 진행 중: 운영 웹 대시보드. 예정: 통합 검증." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/roadmap-dark.svg?v=motion-always-20261013">
+  <source media="(prefers-color-scheme: light)" srcset="assets/roadmap-light.svg?v=motion-always-20261013">
+  <img src="assets/roadmap-light.svg?v=motion-always-20261013" alt="개발 운행 현황. 구현: MVP 기준 수립, 수집·전처리(PR #7), ML 재구성(PR #2), 추론 파이프라인(PR #1). 진행 중: 운영 웹 대시보드. 예정: 통합 검증." width="100%">
 </picture>
 
 | 구간 | 한 일 | 기록 |
@@ -104,9 +104,9 @@
 ## 기술 스택
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/stack-light.svg">
-  <img src="assets/stack-light.svg" alt="기술 스택. 데이터 흐름: Azure Functions, Azure Event Hubs, Azure Stream Analytics, PostgreSQL. 예측 모델: Python, Azure Machine Learning, SQL. 근거·운영 웹: Azure AI Search, Next.js, TypeScript." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stack-dark.svg?v=motion-always-20261013">
+  <source media="(prefers-color-scheme: light)" srcset="assets/stack-light.svg?v=motion-always-20261013">
+  <img src="assets/stack-light.svg?v=motion-always-20261013" alt="기술 스택. 데이터 흐름: Azure Functions, Azure Event Hubs, Azure Stream Analytics, PostgreSQL. 예측 모델: Python, Azure Machine Learning, SQL. 근거·운영 웹: Azure AI Search, Next.js, TypeScript." width="100%">
 </picture>
 
 <br>
@@ -127,7 +127,7 @@
 <br>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/footer-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/footer-light.svg">
-  <img src="assets/footer-light.svg" alt="검증 가능한 데이터와 예측으로, 사람 중심의 교통 운영을 지원합니다." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/footer-dark.svg?v=motion-always-20261013">
+  <source media="(prefers-color-scheme: light)" srcset="assets/footer-light.svg?v=motion-always-20261013">
+  <img src="assets/footer-light.svg?v=motion-always-20261013" alt="검증 가능한 데이터와 예측으로, 사람 중심의 교통 운영을 지원합니다." width="100%">
 </picture>

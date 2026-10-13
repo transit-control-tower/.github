@@ -4,7 +4,6 @@
     text { font-family: Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif; }
     .b { font-weight: 700; }
     .xb { font-weight: 800; letter-spacing: -0.02em; }
-    @media (prefers-reduced-motion: reduce) { .train { display: none; } }
     </style>
 <rect width="1280" height="600" fill="#F2F4F3"/>
 <text x="48" y="52" font-size="18" fill="#202833" text-anchor="start" class="b">시스템 노선도</text>
