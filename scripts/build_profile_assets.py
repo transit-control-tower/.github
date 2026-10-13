@@ -5,7 +5,12 @@ transit-control-tower 조직 프로필 SVG 생성기
     python scripts/build_profile_assets.py
 
 profile/assets/ 아래에 다크·라이트 SVG를 모두 다시 만듭니다.
-진행 상태(ROADMAP)나 문구를 바꾼 뒤 다시 실행하면 됩니다. 외부 패키지가 필요 없습니다.
+진행 상태(ROADMAP)나 문구를 바꾼 뒤 다시 실행하면 됩니다.
+
+글자는 선택한 글꼴의 윤곽선(path)으로 변환해 넣습니다. 보는 사람 PC에 글꼴이 없어도 똑같이 보입니다.
+필요 패키지:  pip install uharfbuzz fonttools
+글꼴은 FONT_FAMILY로 고르고, 첫 실행 때 공식 저장소에서 scripts/fonts/ 로 받아 둡니다.
+패키지나 글꼴이 없으면 예전처럼 시스템 글꼴 <text>로 만듭니다.
 """
 from pathlib import Path
 from xml.sax.saxutils import escape
@@ -28,7 +33,7 @@ FONT = ("Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothi
         "'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif")
 
 
-def svg(w, h, t, body, title, extra_style=""):
+def svg(w, h, t, body, title, extra_style="", radius=0):
     style = f"""
     text {{ font-family: {FONT}; }}
     .b {{ font-weight: 700; }}
@@ -36,20 +41,126 @@ def svg(w, h, t, body, title, extra_style=""):
     """
     if extra_style:
         style += extra_style
+    clip_defs = (f'<defs><clipPath id="banner-clip"><rect width="{w}" height="{h}" '
+                 f'rx="{radius}"/></clipPath></defs>\n') if radius else ""
+    clip_open = '<g clip-path="url(#banner-clip)">\n' if radius else ""
+    clip_close = '</g>\n' if radius else ""
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" '
             f'viewBox="0 0 {w} {h}" role="img" aria-label="{escape(title)}">\n'
             f'<title>{escape(title)}</title>\n<style>{style}</style>\n'
-            f'<rect width="{w}" height="{h}" fill="{t["bg"]}"/>\n{body}\n</svg>\n')
+            f'{glyph_defs()}{clip_defs}{clip_open}<rect width="{w}" height="{h}" fill="{t["bg"]}"/>\n'
+            f'{body}\n{clip_close}</svg>\n')
+
+
+# ---------------------------------------------------------------- 글자 → 윤곽선
+FONT_DIR = Path(__file__).resolve().parent / "fonts"
+
+# 쓸 글꼴: 아래 FAMILIES의 키 중 하나 (모두 무료·상업 이용 가능한 오픈 라이선스)
+FONT_FAMILY = "WantedSans"
+
+FAMILIES = {
+    "Pretendard": ("https://github.com/orioncactus/pretendard/raw/v1.3.9/"
+                   "packages/pretendard/dist/public/static/Pretendard-{w}.otf",
+                   {"": "Regular", "b": "Bold", "xb": "ExtraBold"}),
+    "SUIT": ("https://raw.githubusercontent.com/sun-typeface/SUIT/55118d981336d8fce005eb62888c12c0568ef7b0/"
+             "fonts/static/otf/SUIT-{w}.otf",
+             {"": "Regular", "b": "Bold", "xb": "ExtraBold"}),
+    "WantedSans": ("https://raw.githubusercontent.com/wanteddev/wanted-sans/02c9b822349c188ada95f9e2d90c2ed18f853235/"
+                   "packages/wanted-sans/fonts/otf/WantedSans-{w}.otf",
+                   {"": "Regular", "b": "Bold", "xb": "ExtraBold"}),
+    "SpoqaHanSansNeo": ("https://raw.githubusercontent.com/spoqa/spoqa-han-sans/6473330babd9f8e486114f1d9a7e7166e2028c51/"
+                        "Original/SpoqaHanSansNeo/SpoqaHanSansNeo-{w}.otf",
+                        {"": "Regular", "b": "Bold", "xb": "Bold"}),
+}
+TRACKING = {"xb": -0.02}  # em 단위 자간
+_FONTS = {}
+_GLYPHS = {}  # 현재 SVG 한 장에서 쓴 글리프: id -> path d
+
+
+def _font(weight):
+    fam = FONT_FAMILY
+    key = (fam, weight)
+    if key in _FONTS:
+        return _FONTS[key]
+    _FONTS[key] = None
+    try:
+        import uharfbuzz as hb
+        from fontTools.ttLib import TTFont
+    except ImportError:
+        return None
+    url = FAMILIES[fam][0]
+    path = FONT_DIR / f"{fam}-{weight}.otf"
+    if not path.exists():
+        try:
+            import urllib.request
+            FONT_DIR.mkdir(parents=True, exist_ok=True)
+            urllib.request.urlretrieve(url.format(w=weight), path)
+        except Exception as e:  # 오프라인이면 시스템 글꼴로 대체
+            print(f"[warn] {fam}-{weight} 다운로드 실패, 시스템 글꼴 사용: {e}")
+            return None
+    data = path.read_bytes()
+    tt = TTFont(path)
+    _FONTS[key] = dict(hb=hb.Font(hb.Face(data)), gs=tt.getGlyphSet(), order=tt.getGlyphOrder(),
+                       upem=tt["head"].unitsPerEm)
+    return _FONTS[key]
+
+
+def _shape(s, f, track_units):
+    import uharfbuzz as hb
+    buf = hb.Buffer()
+    buf.add_str(s)
+    buf.guess_segment_properties()
+    hb.shape(f["hb"], buf, {"kern": True, "liga": True})
+    out, pen_x = [], 0
+    for info, pos in zip(buf.glyph_infos, buf.glyph_positions):
+        out.append((info.codepoint, pen_x + pos.x_offset, pos.y_offset))
+        pen_x += pos.x_advance + track_units
+    return out, pen_x - track_units
+
+
+def _glyph_id(weight, gid, f):
+    key = f"g{weight[0]}{weight[-1]}{gid}"
+    if key not in _GLYPHS:
+        from fontTools.pens.svgPathPen import SVGPathPen
+        from fontTools.pens.transformPen import TransformPen
+        pen = SVGPathPen(f["gs"], ntos=lambda v: ("%.0f" % v))
+        f["gs"][f["order"][gid]].draw(TransformPen(pen, (1, 0, 0, -1, 0, 0)))
+        _GLYPHS[key] = pen.getCommands()
+    return key
+
+
+def glyph_defs():
+    """svg()가 호출: 이번 SVG에서 쓴 글리프 정의를 꺼내고 초기화."""
+    if not _GLYPHS:
+        return ""
+    d = "".join(f'<path id="{k}" d="{v}"/>' for k, v in _GLYPHS.items() if v)
+    _GLYPHS.clear()
+    return f"<defs>{d}</defs>\n"
 
 
 def text(x, y, s, size, fill, anchor="start", cls="", extra=""):
-    c = f' class="{cls}"' if cls else ""
-    return (f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" '
-            f'text-anchor="{anchor}"{c}{extra}>{escape(s)}</text>')
+    weight = FAMILIES[FONT_FAMILY][1].get(cls, "Regular")
+    f = _font(weight)
+    if f is None:
+        c = f' class="{cls}"' if cls else ""
+        return (f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" '
+                f'text-anchor="{anchor}"{c}{extra}>{escape(s)}</text>')
+    track = TRACKING.get(cls, 0) * f["upem"]
+    glyphs, width = _shape(s, f, track)
+    k = size / f["upem"]
+    shift = {"start": 0, "middle": -width * k / 2, "end": -width * k}[anchor]
+    uses = "".join(f'<use href="#{_glyph_id(weight, gid, f)}" x="{gx:.0f}"'
+                   + (f' y="{-gy:.0f}"' if gy else "") + "/>"
+                   for gid, gx, gy in glyphs if _GLYPHS.get(_glyph_id(weight, gid, f)))
+    return (f'<g fill="{fill}"{extra}><g transform="translate({x + shift:.2f} {y}) scale({k:.5f})">'
+            f'{uses}</g></g>')
 
 
 def est(s, size):
-    """대략적인 글자 폭 추정(배치용)."""
+    """글자 폭(px). 선택한 글꼴 Bold 기준 실측, 글꼴이 없으면 근사값."""
+    f = _font("Bold")
+    if f is not None:
+        return _shape(s, f, 0)[1] * size / f["upem"]
     w = 0
     for ch in s:
         if "\uac00" <= ch <= "\ud7a3":
@@ -110,9 +221,9 @@ def hero_train(path_d, dur, begin, accent, parked, bus=False):
 
 def flow_background(width, height, theme):
     """두 주기 길이의 곡선을 이동해 반복 경계가 이어지는 배경을 만든다."""
-    layers = [(354, 23, GREEN, 0.13, 18, False),
-              (371, 24, BLUE, 0.22, 24, True),
-              (391, 16, PINK, 0.09, 30, False)]
+    layers = [(354, 36, GREEN, 0.13, 18, False),
+              (371, 36, BLUE, 0.22, 24, True),
+              (391, 24, PINK, 0.09, 30, False)]
     moving, still = [], []
     for y, amplitude, color, opacity, duration, reverse in layers:
         d = f"M 0 {y}"
@@ -181,7 +292,7 @@ def hero(t, name):
     motion_style = """
     .train-parked, .flow-still { display: none; }
     """
-    return svg(W, H, t, "\n".join(b), "Transit Control Tower — 관제탑5팀", motion_style)
+    return svg(W, H, t, "\n".join(b), "Transit Control Tower — 관제탑5팀", motion_style, radius=28)
 
 
 # ---------------------------------------------------------------- route map
