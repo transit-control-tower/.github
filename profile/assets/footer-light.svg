@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="150" viewBox="0 0 1280 150" role="img" aria-label="검증 가능한 데이터와 예측으로, 사람 중심의 교통 운영을 지원합니다.">
+<title>검증 가능한 데이터와 예측으로, 사람 중심의 교통 운영을 지원합니다.</title>
+<style>
+    text { font-family: Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif; }
+    .b { font-weight: 700; }
+    .xb { font-weight: 800; letter-spacing: -0.02em; }
+    @media (prefers-reduced-motion: reduce) { .train { display: none; } }
+    </style>
+<rect width="1280" height="150" fill="#F2F4F3"/>
+<path d="M 0 39 H 360 L 396 75 H 470" fill="none" stroke="#00A84D" stroke-width="10" stroke-linejoin="round"/>
+<path d="M 0 75 H 470" fill="none" stroke="#E5336F" stroke-width="10" stroke-linejoin="round"/>
+<path d="M 0 111 H 360 L 396 75 H 470" fill="none" stroke="#3D5BAB" stroke-width="10" stroke-linejoin="round"/>
+<circle cx="470" cy="75" r="24" fill="#FFFFFF" stroke="#202833" stroke-width="6"/><circle cx="470" cy="75" r="7.2" fill="#202833"/>
+<text x="520" y="69" font-size="21" fill="#202833" text-anchor="start" class="b">검증 가능한 데이터와 예측으로,</text>
+<text x="520" y="99" font-size="21" fill="#202833" text-anchor="start" class="b">사람 중심의 교통 운영을 지원합니다.</text>
+</svg>

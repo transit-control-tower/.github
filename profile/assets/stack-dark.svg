@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="384" viewBox="0 0 1280 384" role="img" aria-label="기술 스택: 데이터 흐름 — Azure Functions, Azure Event Hubs, Azure Stream Analytics, PostgreSQL; 예측 모델 — Python, Azure Machine Learning, SQL; 근거·운영 웹 — Azure AI Search, Next.js, TypeScript">
+<title>기술 스택: 데이터 흐름 — Azure Functions, Azure Event Hubs, Azure Stream Analytics, PostgreSQL; 예측 모델 — Python, Azure Machine Learning, SQL; 근거·운영 웹 — Azure AI Search, Next.js, TypeScript</title>
+<style>
+    text { font-family: Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif; }
+    .b { font-weight: 700; }
+    .xb { font-weight: 800; letter-spacing: -0.02em; }
+    @media (prefers-reduced-motion: reduce) { .train { display: none; } }
+    </style>
+<rect width="1280" height="384" fill="#1E2733"/>
+<text x="48" y="48" font-size="18" fill="#F3F5F7" text-anchor="start" class="b">기술 스택</text>
+<text x="1232" y="48" font-size="14" fill="#9AA3AF" text-anchor="end">노선별로 맡은 역할</text>
+<rect x="48" y="76" width="120.48" height="34" rx="17" fill="#00A84D"/>
+<text x="68" y="99" font-size="16" fill="#FFFFFF" text-anchor="start" class="b">데이터 흐름</text>
+<path d="M 72 110 V 330" stroke="#00A84D" stroke-width="12" stroke-linecap="round"/>
+<circle cx="72" cy="150" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="100" y="155" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">Azure Functions</text>
+<text x="100" y="175" font-size="13" fill="#9AA3AF" text-anchor="start">수집 실행</text>
+<circle cx="72" cy="210" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="100" y="215" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">Azure Event Hubs</text>
+<text x="100" y="235" font-size="13" fill="#9AA3AF" text-anchor="start">스트림 수신</text>
+<circle cx="72" cy="270" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="100" y="275" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">Azure Stream Analytics</text>
+<text x="100" y="295" font-size="13" fill="#9AA3AF" text-anchor="start">5분 관측 집계</text>
+<circle cx="72" cy="330" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="100" y="335" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">PostgreSQL</text>
+<text x="100" y="355" font-size="13" fill="#9AA3AF" text-anchor="start">관측·예측 저장</text>
+<rect x="456" y="76" width="105.28" height="34" rx="17" fill="#E5336F"/>
+<text x="476" y="99" font-size="16" fill="#FFFFFF" text-anchor="start" class="b">예측 모델</text>
+<path d="M 480 110 V 270" stroke="#E5336F" stroke-width="12" stroke-linecap="round"/>
+<circle cx="480" cy="150" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="508" y="155" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">Python</text>
+<text x="508" y="175" font-size="13" fill="#9AA3AF" text-anchor="start">수집·전처리·학습</text>
+<circle cx="480" cy="210" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="508" y="215" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">Azure Machine Learning</text>
+<text x="508" y="235" font-size="13" fill="#9AA3AF" text-anchor="start">모델 추론</text>
+<circle cx="480" cy="270" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="508" y="275" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">SQL</text>
+<text x="508" y="295" font-size="13" fill="#9AA3AF" text-anchor="start">스키마·질의</text>
+<rect x="864" y="76" width="125.60000000000001" height="34" rx="17" fill="#3D5BAB"/>
+<text x="884" y="99" font-size="16" fill="#FFFFFF" text-anchor="start" class="b">근거·운영 웹</text>
+<path d="M 888 110 V 270" stroke="#3D5BAB" stroke-width="12" stroke-linecap="round"/>
+<circle cx="888" cy="150" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="916" y="155" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">Azure AI Search</text>
+<text x="916" y="175" font-size="13" fill="#9AA3AF" text-anchor="start">운영 문서 검색</text>
+<circle cx="888" cy="210" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="916" y="215" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">Next.js</text>
+<text x="916" y="235" font-size="13" fill="#9AA3AF" text-anchor="start">운영 웹 서비스</text>
+<circle cx="888" cy="270" r="10" fill="#1E2733" stroke="#F3F5F7" stroke-width="4"/>
+<text x="916" y="275" font-size="17" fill="#F3F5F7" text-anchor="start" class="b">TypeScript</text>
+<text x="916" y="295" font-size="13" fill="#9AA3AF" text-anchor="start">대시보드 개발</text>
+</svg>
