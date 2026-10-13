@@ -28,13 +28,15 @@ FONT = ("Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothi
         "'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif")
 
 
-def svg(w, h, t, body, title):
+def svg(w, h, t, body, title, extra_style=""):
     style = f"""
     text {{ font-family: {FONT}; }}
     .b {{ font-weight: 700; }}
     .xb {{ font-weight: 800; letter-spacing: -0.02em; }}
     @media (prefers-reduced-motion: reduce) {{ .train {{ display: none; }} }}
     """
+    if extra_style:
+        style += extra_style
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" '
             f'viewBox="0 0 {w} {h}" role="img" aria-label="{escape(title)}">\n'
             f'<title>{escape(title)}</title>\n<style>{style}</style>\n'
@@ -79,30 +81,62 @@ def train(path_d, dur, begin, color="#FFFFFF"):
             f'path="{path_d}"/></g>')
 
 
-def hero_train(path_d, dur, begin, accent, bus=False):
-    """노선 위를 달리는 차량. 창문·차체를 구분하고 반복 경계에서는 숨긴다."""
-    cars = [(-25, 50)] if bus else [(-32, 20), (-10, 20), (12, 20)]
+def hero_vehicle(accent, bus=False):
+    """축소된 프로필에서도 창문과 차체가 구분되는 차량."""
+    cars = [(-32, 64)] if bus else [(-46, 29), (-15, 29), (16, 29)]
     body = []
     for x, w in cars:
-        body.append(f'<rect x="{x}" y="-9" width="{w}" height="18" rx="5" '
+        body.append(f'<rect x="{x}" y="-12" width="{w}" height="24" rx="5" '
                     f'fill="#FFFFFF" stroke="{accent}" stroke-width="1.5"/>')
-        body.append(f'<rect x="{x + 3}" y="3" width="{w - 6}" height="2" rx="1" fill="{accent}"/>')
-        for wx in range(x + 4, x + w - 5, 7):
-            body.append(f'<rect x="{wx}" y="-5" width="5" height="5" rx="1" fill="#1E2733"/>')
+        body.append(f'<rect x="{x + 3}" y="6" width="{w - 6}" height="2" rx="1" fill="{accent}"/>')
+        for wx in range(x + 4, x + w - 6, 8):
+            body.append(f'<rect x="{wx}" y="-7" width="6" height="7" rx="1" fill="#1E2733"/>')
     if bus:
-        for x in (-16, 16):
-            body.append(f'<circle cx="{x}" cy="9" r="2.5" fill="#1E2733"/>')
-    return (f'<g class="train">{"".join(body)}'
+        for x in (-22, 22):
+            body.append(f'<circle cx="{x}" cy="12" r="3" fill="#1E2733"/>')
+    return "".join(body)
+
+
+def hero_train(path_d, dur, begin, accent, parked, bus=False):
+    """이동 차량과 모션 줄이기용 정차 차량을 각각 그린다."""
+    vehicle = hero_vehicle(accent, bus)
+    x, y, angle = parked
+    return (f'<g class="train">{vehicle}'
             f'<animateMotion dur="{dur}s" begin="{begin}s" repeatCount="indefinite" rotate="{0 if bus else "auto"}" '
             f'path="{path_d}"/>'
             f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" '
-            f'dur="{dur}s" begin="{begin}s" repeatCount="indefinite"/></g>')
+            f'dur="{dur}s" begin="{begin}s" repeatCount="indefinite"/></g>'
+            f'<g class="train-parked" transform="translate({x} {y}) rotate({angle})">{vehicle}</g>')
+
+
+def flow_background(width, height, theme):
+    """두 주기 길이의 곡선을 이동해 반복 경계가 이어지는 배경을 만든다."""
+    layers = [(354, 23, GREEN, 0.13, 18, False),
+              (371, 24, BLUE, 0.22, 24, True),
+              (391, 16, PINK, 0.09, 30, False)]
+    moving, still = [], []
+    for y, amplitude, color, opacity, duration, reverse in layers:
+        d = f"M 0 {y}"
+        for start in (0, width):
+            d += (f" C {start + width / 6:.2f} {y - amplitude}"
+                  f" {start + width / 3:.2f} {y - amplitude} {start + width / 2:.2f} {y}"
+                  f" C {start + 2 * width / 3:.2f} {y + amplitude}"
+                  f" {start + 5 * width / 6:.2f} {y + amplitude} {start + width} {y}")
+        d += f" L {2 * width} {height + 30} L 0 {height + 30} Z"
+        opacity *= 0.75 if theme == "light" else 1
+        shape = f'<path d="{d}" fill="{color}" opacity="{opacity:.3f}"/>'
+        values = f"{-width} 0;0 0" if reverse else f"0 0;{-width} 0"
+        moving.append(f'<g>{shape}<animateTransform attributeName="transform" type="translate" '
+                      f'values="{values}" dur="{duration}s" repeatCount="indefinite"/></g>')
+        still.append(shape)
+    return (f'<g class="flow">{"".join(moving)}</g>'
+            f'<g class="flow-still">{"".join(still)}</g>')
 
 
 # ---------------------------------------------------------------- hero
 def hero(t, name):
     W, H = 1280, 400
-    b = []
+    b = [flow_background(W, H, name)]
     # 오른쪽 노선 모티프 (조직 아바타와 같은 구도)
     b.append(f'''<defs>
   <linearGradient id="fade" x1="0" x2="1" y1="0" y2="0">
@@ -118,9 +152,10 @@ def hero(t, name):
              f'<path d="{green}" stroke="{GREEN}" stroke-width="34"/>'
              f'<path d="{blue}" stroke="{BLUE}" stroke-width="34"/>'
              f'<path d="{pink}" stroke="{PINK}" stroke-width="34"/></g>')
-    b.append(hero_train("M 900 196 H 1320", 8, 0, GREEN))
-    b.append(hero_train("M 1320 316 H 900", 10, -4, BLUE, bus=True))
-    b.append(hero_train("M 1192 -40 V 84 L 1080 196 L 976 300 V 440", 11, -3, PINK))
+    b.append(hero_train("M 900 196 H 1340", 8, -1, GREEN, (1160, 196, 0)))
+    b.append(hero_train("M 1340 316 H 900", 10, -4, BLUE, (1130, 316, 0), bus=True))
+    b.append(hero_train("M 1192 -50 V 84 L 1080 196 L 976 300 V 450", 11, -3, PINK,
+                        (1162, 114, 135)))
     b.append(station(976, 316, t, r=15, sw=6))
     b.append(station(1232, 196, t, r=15, sw=6))
     b.append(station(1232, 316, t, r=15, sw=6))
@@ -144,7 +179,14 @@ def hero(t, name):
         kw = est(k, 15)
         b.append(text(cx + 30 + kw, cy, v, 14, t["muted"]))
         cx += 30 + kw + est(v, 14) + 24
-    return svg(W, H, t, "\n".join(b), "Transit Control Tower — 관제탑5팀")
+    motion_style = """
+    .train-parked, .flow-still { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+        .flow { display: none; }
+        .train-parked, .flow-still { display: inline; }
+    }
+    """
+    return svg(W, H, t, "\n".join(b), "Transit Control Tower — 관제탑5팀", motion_style)
 
 
 # ---------------------------------------------------------------- route map

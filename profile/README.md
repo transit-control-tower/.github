@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
-  <img src="assets/hero-light.svg" alt="Transit Control Tower — 관제탑5팀. 교통 데이터로 도시의 흐름을 읽고, 운영 판단을 돕습니다." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg?v=flow-20261013">
+  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg?v=flow-20261013">
+  <img src="assets/hero-light.svg?v=flow-20261013" alt="Transit Control Tower — 관제탑5팀. 교통 데이터로 도시의 흐름을 읽고, 운영 판단을 돕습니다." width="100%">
 </picture>
 
 <p align="center">
