@@ -79,6 +79,26 @@ def train(path_d, dur, begin, color="#FFFFFF"):
             f'path="{path_d}"/></g>')
 
 
+def hero_train(path_d, dur, begin, accent, bus=False):
+    """노선 위를 달리는 차량. 창문·차체를 구분하고 반복 경계에서는 숨긴다."""
+    cars = [(-25, 50)] if bus else [(-32, 20), (-10, 20), (12, 20)]
+    body = []
+    for x, w in cars:
+        body.append(f'<rect x="{x}" y="-9" width="{w}" height="18" rx="5" '
+                    f'fill="#FFFFFF" stroke="{accent}" stroke-width="1.5"/>')
+        body.append(f'<rect x="{x + 3}" y="3" width="{w - 6}" height="2" rx="1" fill="{accent}"/>')
+        for wx in range(x + 4, x + w - 5, 7):
+            body.append(f'<rect x="{wx}" y="-5" width="5" height="5" rx="1" fill="#1E2733"/>')
+    if bus:
+        for x in (-16, 16):
+            body.append(f'<circle cx="{x}" cy="9" r="2.5" fill="#1E2733"/>')
+    return (f'<g class="train">{"".join(body)}'
+            f'<animateMotion dur="{dur}s" begin="{begin}s" repeatCount="indefinite" rotate="{0 if bus else "auto"}" '
+            f'path="{path_d}"/>'
+            f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" '
+            f'dur="{dur}s" begin="{begin}s" repeatCount="indefinite"/></g>')
+
+
 # ---------------------------------------------------------------- hero
 def hero(t, name):
     W, H = 1280, 400
@@ -98,9 +118,9 @@ def hero(t, name):
              f'<path d="{green}" stroke="{GREEN}" stroke-width="34"/>'
              f'<path d="{blue}" stroke="{BLUE}" stroke-width="34"/>'
              f'<path d="{pink}" stroke="{PINK}" stroke-width="34"/></g>')
-    b.append(train("M 820 196 H 1300", 11, 0))
-    b.append(train("M 820 316 H 1300", 14, -5))
-    b.append(train("M 1192 -20 V 84 L 1080 196 L 976 300 V 420", 9, -3))
+    b.append(hero_train("M 900 196 H 1320", 8, 0, GREEN))
+    b.append(hero_train("M 1320 316 H 900", 10, -4, BLUE, bus=True))
+    b.append(hero_train("M 1192 -40 V 84 L 1080 196 L 976 300 V 440", 11, -3, PINK))
     b.append(station(976, 316, t, r=15, sw=6))
     b.append(station(1232, 196, t, r=15, sw=6))
     b.append(station(1232, 316, t, r=15, sw=6))
