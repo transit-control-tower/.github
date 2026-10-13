@@ -1,7 +1,7 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/transit-control-tower/jamsil-transit-congestion-forecast/main/assets/banners/banner-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/transit-control-tower/jamsil-transit-congestion-forecast/main/assets/banners/banner-light.png">
-  <img src="https://raw.githubusercontent.com/transit-control-tower/jamsil-transit-congestion-forecast/main/assets/banners/banner-light.png" alt="잠실 교통 혼잡 예측 — 현재, 60분 후, 120분 후 버스·지하철 혼잡 전망" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/transit-control-tower/.github/main/assets/banners/banner-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/transit-control-tower/.github/main/assets/banners/banner-light.png">
+  <img src="https://raw.githubusercontent.com/transit-control-tower/.github/main/assets/banners/banner-light.png" alt="잠실 교통 혼잡 예측 — 현재, 60분 후, 120분 후 버스·지하철 혼잡 전망" width="100%">
 </picture>
 
 <div align="center">
