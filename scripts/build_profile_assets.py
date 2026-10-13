@@ -29,11 +29,11 @@ THEMES = {
                   station="#FFFFFF", ring="#202833", train="#FFFFFF"),
 }
 
-FONT = ("Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', "
+FONT = ("'Wanted Sans', Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', "
         "'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif")
 
 
-def svg(w, h, t, body, title, extra_style="", radius=0):
+def svg(w, h, t, body, title, extra_style="", radius=28):
     style = f"""
     text {{ font-family: {FONT}; }}
     .b {{ font-weight: 700; }}

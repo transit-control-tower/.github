@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-label="Transit Control Tower — 관제탑5팀">
 <title>Transit Control Tower — 관제탑5팀</title>
 <style>
-    text { font-family: Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif; }
+    text { font-family: 'Wanted Sans', Pretendard, 'Pretendard Variable', 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', 'Noto Sans CJK KR', system-ui, sans-serif; }
     .b { font-weight: 700; }
     .xb { font-weight: 800; letter-spacing: -0.02em; }
     
