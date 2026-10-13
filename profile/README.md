@@ -19,12 +19,6 @@
 
 ## 잠실 교통 혼잡 예측
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.png">
-  <source media="(prefers-color-scheme: light)" srcset="assets/banner-light.png">
-  <img src="assets/banner-light.png" alt="잠실 교통 혼잡 예측 — 현재, 60분 후, 120분 후 버스·지하철 혼잡 전망" width="100%">
-</picture>
-
 잠실종합운동장 권역의 버스·지하철 승하차, 공연·행사, 기상 정보를 결합해 **현재·60분 후·120분 후의 상대 혼잡 위험**을 예측하고, 공공 교통 운영 담당자의 대응 판단을 지원합니다.
 
 | 무엇을 | 어떻게 |
