@@ -42,14 +42,16 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/route-map-dark.svg?v=wantedsans-rounded-all-20261014">
   <source media="(prefers-color-scheme: light)" srcset="assets/route-map-light.svg?v=wantedsans-rounded-all-20261014">
-  <img src="assets/route-map-light.svg?v=wantedsans-rounded-all-20261014" alt="시스템 노선도. 실시간 관측 노선: 도시데이터 OA-21285, Azure Functions, Event Hubs, Stream Analytics, PostgreSQL. 혼잡 예측 노선: 날씨·행사·공휴일, Inference Function, Azure ML. 근거 검색 노선: 운영 매뉴얼·사례, Azure AI Search, RAG API. 세 노선은 운영 웹 대시보드에서 만납니다." width="100%">
+  <img src="assets/route-map-light.svg?v=wantedsans-rounded-all-20261014" alt="2026년 8월 MVP 설계·시연의 세 노선 개념도. OA-21285 교통·기상 입력에서 수집 Function, Event Hubs, Stream Analytics, PostgreSQL로 이어지는 관측 경로, 별도 행사·공휴일 기준 정보를 조회하는 추론 Function과 Azure ML의 당시 예측 경로, 운영 문서와 Azure AI Search·RAG를 거치는 근거 검색 경로가 Next.js 대시보드에서 만납니다. 현재 운영 연동 상태와는 구분합니다." width="100%">
 </picture>
 
-세 개의 노선이 하나의 대시보드로 모입니다.
+이 노선도는 **2026년 8월 최종 MVP 설계·시연 구조를 단순화한 개념도**입니다. 수집·추론·RAG를 포함한 현재 클라우드 상시 운영 완료를 의미하지 않습니다.
 
-- **실시간 관측** — 서울시 도시데이터를 5분마다 수집해 Event Hubs와 Stream Analytics로 집계하고 PostgreSQL에 저장합니다.
-- **혼잡 예측** — 집계된 관측에 날씨·행사·공휴일 조건을 더해 Azure ML로 혼잡 점수를 산출하고, 결과를 다시 저장합니다.
-- **근거 검색** — 공식 운영 매뉴얼과 과거 대응 사례를 Azure AI Search로 찾아, 판단에 참고할 근거로 함께 보여줍니다.
+- **실시간 관측** — OA-21285의 버스·지하철 **승하차 범위**와 현재 기상을 구분해 수집합니다. 당시 설계에는 Functions → Event Hubs → Stream Analytics의 관측·날씨 분기 저장이 포함됐습니다.
+- **혼잡 예측** — 행사·공휴일은 교통 스트림과 **별도 수집·검증·DB 적재**하며, Inference Function이 교통 집계·날씨·행사·공휴일을 조회해 Feature를 구성합니다. Azure ML 엔드포인트 호출은 당시 시연 경로로, 최신 개선 모델의 운영 배포 여부와 구분합니다.
+- **근거 검색** — 공식 운영 문서와 대응 사례를 검색·검토해 담당자 판단을 지원합니다. 실제 검색과 공개 웹 데모의 합성 답변은 별도입니다.
+
+**현재 코드 기준:** OA-21285 MIN/MAX 보존형 수집·전처리 및 ML 시간순 검증 개선은 진행됐지만, 기존 Azure Collector·집계·DB 골격과 미병합 추론 후보의 시간·단위·결측 계약은 추가 수정이 필요합니다. [실제 구현·연동 상태와 상세 데이터 흐름](https://github.com/transit-control-tower/jamsil-transit-congestion-forecast#시스템-구성)을 확인할 수 있습니다.
 
 <br>
 
@@ -82,9 +84,9 @@
 | --- | --- | --- |
 | 수집·전처리 | 원천별 정규화, CSV/XLSX 재실행, 다중 월 스냅샷, 시간축·품질 검사 | PR #7 |
 | ML 재구성 | 기준 코드 복원, Pipeline·시간순 평가, 월별 이용량 평가와 오류 진단 | PR #2 |
-| 추론 파이프라인 | PostgreSQL 기반 추론 Function, DB 스키마와 알림 연동 | PR #1 |
+| 추론 파이프라인 | 8월 시연 경로와 별개로 현재 개선 Function·Stream Analytics·PostgreSQL 후보 통합 검증 중 | PR #3~#6 (미병합) |
 
-개선 모델은 오프라인 진단용이며, 실시간 추론·배포 모델의 성능으로 해석하지 않습니다. 클라우드 상시 가동과 종단 간 연동은 통합 검증 단계에서 확인합니다.
+개선 모델은 오프라인 진단용이며, 실시간 추론·배포 모델의 성능으로 해석하지 않습니다. 현재 공개 대시보드는 합성 데이터 데모입니다. 클라우드 상시 가동과 종단 간 연동은 통합 검증 단계에서 확인합니다.
 
 <br>
 
