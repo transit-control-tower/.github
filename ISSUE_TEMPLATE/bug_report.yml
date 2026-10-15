@@ -1,0 +1,23 @@
+name: 오류 신고
+description: 재현 가능한 오류를 기록합니다.
+title: "fix: "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 문제와 기대 동작
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 재현 방법
+      description: 명령과 최소 재현 절차를 적고 인증정보와 개인정보는 제거해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: 완료 기준과 검증 방법
+    validations:
+      required: true
