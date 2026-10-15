@@ -42,13 +42,13 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/route-map-dark.svg?v=wantedsans-rounded-all-20261014">
   <source media="(prefers-color-scheme: light)" srcset="assets/route-map-light.svg?v=wantedsans-rounded-all-20261014">
-  <img src="assets/route-map-light.svg?v=wantedsans-rounded-all-20261014" alt="2026년 8월 MVP 설계·시연의 세 노선 개념도. OA-21285 교통·기상 입력에서 수집 Function, Event Hubs, Stream Analytics, PostgreSQL로 이어지는 관측 경로, 별도 행사·공휴일 기준 정보를 조회하는 추론 Function과 Azure ML의 당시 예측 경로, 운영 문서와 Azure AI Search·RAG를 거치는 근거 검색 경로가 Next.js 대시보드에서 만납니다. 현재 운영 연동 상태와는 구분합니다." width="100%">
+  <img src="assets/route-map-light.svg?v=wantedsans-rounded-all-20261014" alt="2026년 8월 MVP 설계·시연의 세 노선 개념도. OA-21285 교통·기상 입력에서 수집 Function, Event Hubs, Stream Analytics, PostgreSQL로 이어지는 관측 경로, 별도 행사·공휴일 기준 정보를 조회하는 추론 Function과 Azure ML 결과를 Inference Function이 PostgreSQL에 저장하는 당시 예측 경로, 운영 문서와 Azure AI Search·RAG를 거치는 근거 검색 경로가 Next.js 대시보드에서 만납니다. 현재 운영 연동 상태와는 구분합니다." width="100%">
 </picture>
 
 이 노선도는 **2026년 8월 최종 MVP 설계·시연 구조를 단순화한 개념도**입니다. 수집·추론·RAG를 포함한 현재 클라우드 상시 운영 완료를 의미하지 않습니다.
 
 - **실시간 관측** — OA-21285의 버스·지하철 **승하차 범위**와 현재 기상을 구분해 수집합니다. 당시 설계에는 Functions → Event Hubs → Stream Analytics의 관측·날씨 분기 저장이 포함됐습니다.
-- **혼잡 예측** — 행사·공휴일은 교통 스트림과 **별도 수집·검증·DB 적재**하며, Inference Function이 교통 집계·날씨·행사·공휴일을 조회해 Feature를 구성합니다. Azure ML 엔드포인트 호출은 당시 시연 경로로, 최신 개선 모델의 운영 배포 여부와 구분합니다.
+- **혼잡 예측** — 행사·공휴일은 교통 스트림과 **별도 수집·검증·DB 적재**하며, Inference Function이 교통 집계·날씨·행사·공휴일을 조회해 Feature를 구성합니다. Azure ML 엔드포인트 호출은 당시 시연 경로로, 최신 개선 모델의 운영 배포 여부와 구분합니다. **예측 결과는 Inference Function이 PostgreSQL에 저장하고, 대시보드는 DB에서 조회합니다.**
 - **근거 검색** — 공식 운영 문서와 대응 사례를 검색·검토해 담당자 판단을 지원합니다. 실제 검색과 공개 웹 데모의 합성 답변은 별도입니다.
 
 **현재 코드 기준:** OA-21285 MIN/MAX 보존형 수집·전처리 및 ML 시간순 검증 개선은 진행됐지만, 기존 Azure Collector·집계·DB 골격과 미병합 추론 후보의 시간·단위·결측 계약은 추가 수정이 필요합니다. [실제 구현·연동 상태와 상세 데이터 흐름](https://github.com/transit-control-tower/jamsil-transit-congestion-forecast#시스템-구성)을 확인할 수 있습니다.

@@ -305,7 +305,9 @@ def route(t, name):
     b.append(text(W - 48, 52, "최종 MVP 설계·시연 기준 흐름", 14, t["muted"], anchor="end"))
 
     gpath = f"M 152 {GY} H 1000 L {HX} {PY}"
-    ppath = f"M 152 {PY} H {HX}"
+    # 예측은 Azure ML에서 대시보드로 직접 가지 않음: Function이 결과를 PostgreSQL에 저장
+    # 노선도에서는 핑크 노선이 저장소(위쪽 그린 노선)에 합류하는 흐름만 간략 표시
+    ppath = f"M 152 {PY} H 920 V {GY}"
     bpath = f"M 152 {BY} H 1000 L {HX} {PY}"
     for d, c in [(gpath, GREEN), (bpath, BLUE), (ppath, PINK)]:
         b.append(f'<path d="{d}" fill="none" stroke="{c}" stroke-width="16" stroke-linejoin="round"/>')

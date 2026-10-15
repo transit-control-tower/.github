@@ -13,7 +13,7 @@
 <g fill="#626B78"><g transform="translate(1064.14 52) scale(0.00684)"><use href="#gRr9293" x="0"/><use href="#gRr8054" x="1770"/><use href="#gRr87" x="4052"/><use href="#gRr151" x="5732"/><use href="#gRr115" x="7152"/><use href="#gRr6165" x="8860"/><use href="#gRr949" x="10630"/><use href="#gRr12230" x="12400"/><use href="#gRr6605" x="12912"/><use href="#gRr7393" x="14682"/><use href="#gRr1313" x="16964"/><use href="#gRr8177" x="18734"/><use href="#gRr11841" x="21016"/><use href="#gRr4213" x="22786"/></g></g>
 <path d="M 152 160 H 1000 L 1150 310" fill="none" stroke="#00A84D" stroke-width="16" stroke-linejoin="round"/>
 <path d="M 152 460 H 1000 L 1150 310" fill="none" stroke="#3D5BAB" stroke-width="16" stroke-linejoin="round"/>
-<path d="M 152 310 H 1150" fill="none" stroke="#E5336F" stroke-width="16" stroke-linejoin="round"/>
+<path d="M 152 310 H 920 V 160" fill="none" stroke="#E5336F" stroke-width="16" stroke-linejoin="round"/>
 <rect x="32" y="141" width="128" height="38" rx="19" fill="#00A84D"/>
 <g fill="#FFFFFF"><g transform="translate(59.49 166) scale(0.00781)"><use href="#gBd6613" x="0"/><use href="#gBd6605" x="1770"/><use href="#gBd757" x="3540"/><use href="#gBd1009" x="5806"/><use href="#gBd9490" x="7576"/></g></g>
 <rect x="32" y="291" width="128" height="38" rx="19" fill="#E5336F"/>
@@ -21,7 +21,7 @@
 <rect x="32" y="441" width="128" height="38" rx="19" fill="#3D5BAB"/>
 <g fill="#FFFFFF"><g transform="translate(66.41 466) scale(0.00781)"><use href="#gBd1261" x="0"/><use href="#gBd865" x="1770"/><use href="#gBd881" x="4036"/><use href="#gBd6074" x="5806"/></g></g>
 <g class="train"><rect x="-13" y="-5" width="26" height="10" rx="5" fill="#FFFFFF" opacity="0.95"></rect><animateMotion dur="12s" begin="0s" repeatCount="indefinite" rotate="auto" path="M 152 160 H 1000 L 1150 310"/></g>
-<g class="train"><rect x="-13" y="-5" width="26" height="10" rx="5" fill="#FFFFFF" opacity="0.95"></rect><animateMotion dur="10s" begin="-4s" repeatCount="indefinite" rotate="auto" path="M 152 310 H 1150"/></g>
+<g class="train"><rect x="-13" y="-5" width="26" height="10" rx="5" fill="#FFFFFF" opacity="0.95"></rect><animateMotion dur="10s" begin="-4s" repeatCount="indefinite" rotate="auto" path="M 152 310 H 920 V 160"/></g>
 <g class="train"><rect x="-13" y="-5" width="26" height="10" rx="5" fill="#FFFFFF" opacity="0.95"></rect><animateMotion dur="13s" begin="-7s" repeatCount="indefinite" rotate="auto" path="M 152 460 H 1000 L 1150 310"/></g>
 <rect x="683" y="143" width="34" height="184" rx="17" fill="#FFFFFF" stroke="#202833" stroke-width="5"/>
 <g fill="#626B78"><g transform="translate(730.00 240) scale(0.00635)"><use href="#gRr7417" x="0"/><use href="#gRr9490" x="1770"/><use href="#gRr7798" x="4052"/><use href="#gRr3862" x="5822"/></g></g>
