@@ -1,0 +1,23 @@
+name: 개발 작업
+description: 구현 범위와 완료 기준을 정리합니다.
+title: "feat: "
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: 작업 목적
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 구현 범위
+      description: 변경 기능과 영향을 받는 문서를 적어 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 완료 기준과 검증 방법
+    validations:
+      required: true
