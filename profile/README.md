@@ -121,9 +121,9 @@
 
 ## 팀
 
-| <img src="https://github.com/soniiiiij.png" width="72" alt="soniiiiij"> | <img src="https://github.com/uuhlynn-oss.png" width="72" alt="uuhlynn-oss"> |
-| :---: | :---: |
-| [**soniiiiij**](https://github.com/soniiiiij) | [**uuhlynn-oss**](https://github.com/uuhlynn-oss) |
+| <img src="https://github.com/yurimakes.png" width="72" alt="yurimakes"> | <img src="https://github.com/soniiiiij.png" width="72" alt="soniiiiij"> | <img src="https://github.com/uuhlynn-oss.png" width="72" alt="uuhlynn-oss"> |
+| :---: | :---: | :---: |
+| [**yurimakes**](https://github.com/yurimakes) | [**soniiiiij**](https://github.com/soniiiiij) | [**uuhlynn-oss**](https://github.com/uuhlynn-oss) |
 
 
 <br>
